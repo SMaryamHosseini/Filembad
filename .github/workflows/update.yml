@@ -1,0 +1,31 @@
+name: Update Subscription
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # هر 10 دقیقه
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run script
+        run: python generate.py
+
+      - name: Commit & Push
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@example.com"
+          git add sub.txt
+          git commit -m "update sub" || echo "no changes"
+          git push
