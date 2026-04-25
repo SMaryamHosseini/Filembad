@@ -1,12 +1,12 @@
-permissions:
-  contents: write
-
 name: Update Subscription
 
 on:
   schedule:
     - cron: "*/10 * * * *"  # هر 10 دقیقه
   workflow_dispatch:
+  
+permissions:
+  contents: write
 
 jobs:
   build:
